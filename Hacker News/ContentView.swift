@@ -8,26 +8,28 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @ObservedObject var networkManager = NetworkManager()
+    
     var body: some View {
         NavigationView{
-            List(posts){ post in
-                Text(post.title)
+            List(networkManager.posts){ post in
+                HStack {
+                    Text(String(post.points))
+                    Text(post.title)
+                }
             }
             .navigationBarTitle("News")
         }
+        .onAppear(perform: {
+            self.networkManager.fetchData()
+        })
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .preferredColorScheme(.dark)
     }
 }
-
-
-let posts = [
-    Post(id: "1", title: "hello"),
-    Post(id: "2", title: "hello2"),
-    Post(id: "3", title: "hello3"),
-    Post(id: "4", title: "hello4"),
-]
