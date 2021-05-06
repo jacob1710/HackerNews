@@ -8,10 +8,32 @@
 import SwiftUI
 
 
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+            // Override point for customization after application launch.
+
+            let coloredAppearance = UINavigationBarAppearance()
+            coloredAppearance.configureWithOpaqueBackground()
+            coloredAppearance.backgroundColor = .systemBlue
+            coloredAppearance.titleTextAttributes = [.foregroundColor: UIColor.yellow]
+            coloredAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.yellow]
+
+            UINavigationBar.appearance().standardAppearance = coloredAppearance
+            UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
+
+            return true
+        }
+}
+
+
 struct ContentView: View {
     @Environment(\.openURL) var openURL
     @ObservedObject var networkManager = NetworkManager()
-    
+    init() {
+//        UIView.appearance().backgroundColor = UIColor.red
+//        UINavigationBar.appearance().backgroundColor = UIColor.red
+
+    }
     var body: some View {
         NavigationView{
             List(networkManager.posts){ post in
@@ -28,6 +50,7 @@ struct ContentView: View {
             }
             .navigationBarTitle("News")
         }
+        .edgesIgnoringSafeArea(.all)
         .onAppear(perform: {
             self.networkManager.fetchData()
         })
@@ -38,6 +61,8 @@ struct ContentView: View {
             UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
     }
 }
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
