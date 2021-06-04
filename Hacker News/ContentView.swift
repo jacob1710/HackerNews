@@ -14,7 +14,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
             let coloredAppearance = UINavigationBarAppearance()
             coloredAppearance.configureWithOpaqueBackground()
-            coloredAppearance.backgroundColor = .systemBlue
+            // Changes navbar color
+            coloredAppearance.backgroundColor = .black
             coloredAppearance.titleTextAttributes = [.foregroundColor: UIColor.yellow]
             coloredAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.yellow]
 
@@ -45,7 +46,20 @@ struct ContentView: View {
                             }
                             .onLongPressGesture {
                                 actionSheet(theurl: post.url!)
-                            }                        
+                            }
+                            .contextMenu {
+                                    Button {
+                                        openURL(getCommentsUrl(objectID: post.objectID))
+                                    } label: {
+                                        Label("View Comments", systemImage: "globe")
+                                    }
+
+                                    Button {
+                                        print("Enable geolocation")
+                                    } label: {
+                                        Label("Detect Location", systemImage: "location.circle")
+                                    }
+                                }
                     }
             }
             .navigationBarTitle("News")
@@ -59,6 +73,12 @@ struct ContentView: View {
         guard let data = URL(string: theurl) else { return }
             let av = UIActivityViewController(activityItems: [data], applicationActivities: nil)
             UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
+    }
+    func getCommentsUrl(objectID: String) -> URL {
+        let baseUrl = "https://news.ycombinator.com/item?id="
+        let combinedUrl = baseUrl+objectID
+        let data = URL(string: combinedUrl)!
+        return data
     }
 }
 
