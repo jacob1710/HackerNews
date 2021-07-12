@@ -17,9 +17,8 @@ struct OpenedLinkView: View {
             WebContentView(urlString: postURLString)
             ZStack{
                 Rectangle()
-                    .frame(height: 30, alignment: .center)
+                    .frame(height: 60, alignment: .center)
                     .foregroundColor(.gray)
-                    .ignoresSafeArea()
                 HStack(spacing: 30){
                     Button {
                         openURL(commentsURL)
@@ -27,26 +26,28 @@ struct OpenedLinkView: View {
                     } label: {
                         Image(systemName: "text.bubble")
                             .resizable()
-                            .frame( width: 25, height: 25, alignment: .center)
+                            .frame(width: 25, height: 25, alignment: .center)
                             .scaledToFit()
                             .foregroundColor(.white)
                     }
-                    .padding()
+                    .padding(EdgeInsets(top: 5, leading: 30, bottom: 20, trailing: 30))
                     Spacer()
                     Button {
                         openURL(URL(string: postURLString)!)
                     } label: {
                         Image(systemName: "globe")
                             .resizable()
-                            .frame( width: 25, height: 25, alignment: .center)
+                            .frame(width: 25, height: 25, alignment: .center)
                             .scaledToFit()
                             .foregroundColor(.white)
                     }
-                    .padding()
+                    .padding(EdgeInsets(top: 5, leading: 30, bottom: 20, trailing: 30))
+
                 }
             }
         }
-        .navigationBarTitle("Testing", displayMode: .inline)
+        .navigationBarTitle(title, displayMode: .inline)
+        .ignoresSafeArea()
     }
 }
 
