@@ -28,38 +28,43 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 
 struct ContentView: View {
+    
     @Environment(\.openURL) var openURL
+    
     @ObservedObject var networkManager = NetworkManager()
-    init() {
-//        UIView.appearance().backgroundColor = UIColor.red
-//        UINavigationBar.appearance().backgroundColor = UIColor.red
-
-    }
+    
     var body: some View {
-        NavigationView{
+        NavigationView {
             List(networkManager.posts){ post in
                     HStack {
                         Text(String(post.points))
-                        Text(post.title)
-                            .onTapGesture{
-                                openURL(URL(string: post.url!)!)
-                            }
-                            .onLongPressGesture {
-                                actionSheet(theurl: post.url!)
-                            }
-                            .contextMenu {
-                                    Button {
-                                        openURL(getCommentsUrl(objectID: post.objectID))
-                                    } label: {
-                                        Label("View Comments", systemImage: "globe")
+                        NavigationLink(
+                            destination: OpenedLinkView(
+                                postURLString: post.url!,
+                                commentsURL: ContentView.getCommentsUrl(objectID: post.objectID),
+                                title: post.title
+                            ),
+                            
+                            label: {
+                                Text(post.title)
+//                                    .onLongPressGesture {
+//                                        actionSheet(theurl: post.url!)
+//                                    }
+                                    .contextMenu {
+                                        Button {
+                                            openURL(ContentView.getCommentsUrl(objectID: post.objectID))
+                                        } label: {
+                                            Label("View Comments", systemImage: "text.bubble")
+                                        }
+                                        Button {
+                                            openURL(URL(string: post.url!)!)
+                                        } label: {
+                                            Label("Open in Browser", systemImage: "globe")
+                                        }
+                                            
                                     }
-
-                                    Button {
-                                        print("Enable geolocation")
-                                    } label: {
-                                        Label("Detect Location", systemImage: "location.circle")
-                                    }
-                                }
+                            })
+                            
                     }
             }
             .navigationBarTitle("News")
@@ -69,12 +74,16 @@ struct ContentView: View {
             self.networkManager.fetchData()
         })
     }
+    
+    
     func actionSheet(theurl: String) {
         guard let data = URL(string: theurl) else { return }
             let av = UIActivityViewController(activityItems: [data], applicationActivities: nil)
             UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
     }
-    func getCommentsUrl(objectID: String) -> URL {
+    
+    
+    static func getCommentsUrl(objectID: String) -> URL {
         let baseUrl = "https://news.ycombinator.com/item?id="
         let combinedUrl = baseUrl+objectID
         let data = URL(string: combinedUrl)!
