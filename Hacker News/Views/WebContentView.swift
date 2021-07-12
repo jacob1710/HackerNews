@@ -14,7 +14,6 @@ struct WebContentView: UIViewRepresentable {
         let webView = WKWebView()
         let request = URLRequest(url: URL(string: urlString)!)
         webView.load(request)
-        
         return webView
         
     }

@@ -15,6 +15,7 @@
 		16005A6E256EC3880071B89D /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16005A6D256EC3880071B89D /* PostData.swift */; };
 		164AE07D269B26A900159CEF /* WebContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164AE07C269B26A900159CEF /* WebContentView.swift */; };
 		164AE07F269B27C600159CEF /* OpenedLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164AE07E269B27C600159CEF /* OpenedLinkView.swift */; };
+		164AE081269CA5C000159CEF /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164AE080269CA5C000159CEF /* CommentsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		16005A6D256EC3880071B89D /* PostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
 		164AE07C269B26A900159CEF /* WebContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebContentView.swift; sourceTree = "<group>"; };
 		164AE07E269B27C600159CEF /* OpenedLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedLinkView.swift; sourceTree = "<group>"; };
+		164AE080269CA5C000159CEF /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 				16005A5B256EBFD10071B89D /* ContentView.swift */,
 				164AE07C269B26A900159CEF /* WebContentView.swift */,
 				164AE07E269B27C600159CEF /* OpenedLinkView.swift */,
+				164AE080269CA5C000159CEF /* CommentsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -172,6 +175,7 @@
 				164AE07D269B26A900159CEF /* WebContentView.swift in Sources */,
 				164AE07F269B27C600159CEF /* OpenedLinkView.swift in Sources */,
 				16005A5A256EBFD10071B89D /* Hacker_NewsApp.swift in Sources */,
+				164AE081269CA5C000159CEF /* CommentsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

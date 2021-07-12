@@ -13,42 +13,42 @@ struct OpenedLinkView: View {
     var commentsURL: URL
     var title: String
     var body: some View {
-        VStack{
-            WebContentView(urlString: postURLString)
-            ZStack{
-                Rectangle()
-                    .frame(height: 60, alignment: .center)
-                    .foregroundColor(.gray)
-                HStack(spacing: 30){
-                    Button {
-                        openURL(commentsURL)
-                        
-                    } label: {
-                        Image(systemName: "text.bubble")
-                            .resizable()
-                            .frame(width: 25, height: 25, alignment: .center)
-                            .scaledToFit()
-                            .foregroundColor(.white)
-                    }
-                    .padding(EdgeInsets(top: 5, leading: 30, bottom: 20, trailing: 30))
-                    Spacer()
-                    Button {
-                        openURL(URL(string: postURLString)!)
-                    } label: {
-                        Image(systemName: "globe")
-                            .resizable()
-                            .frame(width: 25, height: 25, alignment: .center)
-                            .scaledToFit()
-                            .foregroundColor(.white)
-                    }
-                    .padding(EdgeInsets(top: 5, leading: 30, bottom: 20, trailing: 30))
+            VStack{
+                WebContentView(urlString: postURLString)
+                ZStack{
+                    Rectangle()
+                        .frame(height: 30, alignment: .center)
+                        .foregroundColor(.black)
+                    HStack(spacing: 30){
+                        NavigationLink(
+                            destination: CommentsView(urlString: commentsURL.absoluteString),
+                            label: {
+                                Image(systemName: "text.bubble")
+                                    .resizable()
+                                    .frame(width: 25, height: 25, alignment: .center)
+                                    .scaledToFit()
+                                    .foregroundColor(.white)
+                            })
+                            .padding(EdgeInsets(top: 5, leading: 30, bottom: 0, trailing: 30))
+                       
+                        Spacer()
+                        Button {
+                            openURL(URL(string: postURLString)!)
+                        } label: {
+                            Image(systemName: "globe")
+                                .resizable()
+                                .frame(width: 25, height: 25, alignment: .center)
+                                .scaledToFit()
+                                .foregroundColor(.white)
+                        }
+                        .padding(EdgeInsets(top: 5, leading: 30, bottom: 0, trailing: 30))
 
+                    }
                 }
             }
+            .navigationBarTitle(title)
         }
-        .navigationBarTitle(title, displayMode: .inline)
-        .ignoresSafeArea()
-    }
+       
 }
 
 struct OpenedLinkView_Previews: PreviewProvider {

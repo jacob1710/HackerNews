@@ -22,8 +22,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             UINavigationBar.appearance().standardAppearance = coloredAppearance
             UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
 
+        
             return true
         }
+    
 }
 
 
