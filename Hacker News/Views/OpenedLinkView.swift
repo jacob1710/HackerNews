@@ -9,19 +9,19 @@ import SwiftUI
 
 struct OpenedLinkView: View {
     @Environment(\.openURL) var openURL
-    var postURLString: String
-    var commentsURL: URL
+    var postURLString: String?
+    var commentsURL: String
     var title: String
     var body: some View {
             VStack{
-                WebContentView(urlString: postURLString)
+                WebContentView(urlString: postURLString ?? commentsURL)
                 ZStack{
                     Rectangle()
                         .frame(height: 30, alignment: .center)
                         .foregroundColor(.black)
                     HStack(spacing: 30){
                         NavigationLink(
-                            destination: CommentsView(urlString: commentsURL.absoluteString),
+                            destination: CommentsView(urlString: commentsURL),
                             label: {
                                 Image(systemName: "text.bubble")
                                     .resizable()
@@ -33,7 +33,7 @@ struct OpenedLinkView: View {
                        
                         Spacer()
                         Button {
-                            openURL(URL(string: postURLString)!)
+                            openURL(URL(string: postURLString ?? commentsURL)!)
                         } label: {
                             Image(systemName: "globe")
                                 .resizable()
@@ -53,6 +53,6 @@ struct OpenedLinkView: View {
 
 struct OpenedLinkView_Previews: PreviewProvider {
     static var previews: some View {
-        OpenedLinkView(postURLString: "https://www.google.co.uk", commentsURL: URL(string: "https://www.google.co.uk")!, title: "Google")
+        OpenedLinkView(postURLString: "https://www.google.co.uk", commentsURL: "https://www.google.co.uk", title: "Google")
     }
 }
