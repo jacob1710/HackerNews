@@ -50,7 +50,6 @@ struct ContentView: View {
                         label: {
                             Text(post.title)
                                 .contextMenu {
-                                    
                                     Button {
                                         openURL(URL(string: ContentView.getCommentsUrl(objectID: post.objectID))!)
                                     } label: {
@@ -66,6 +65,9 @@ struct ContentView: View {
                         })
                     
                 }
+//                if post.url == ContentView.getCommentsUrl(objectID: post.objectID){
+//                    .foregroundColor(.orange)
+//                }
             }
             .navigationBarTitle("News")
         }
