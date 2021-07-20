@@ -16,9 +16,6 @@ struct OpenedLinkView: View {
     @State var webContentView: WebContentView?
     var body: some View {
             VStack{
-                ZStack{
-                    Text(String(url ?? "url"))
-                }
                 webContentView                
                 ZStack{
                     Rectangle()
@@ -72,7 +69,10 @@ struct OpenedLinkView: View {
                     }
                 }
             }
-            .navigationBarTitle(title)
+            .navigationBarTitle(webContentView?.webView.title ?? title)
+            .onAppear(perform: {
+                self.webContentView = WebContentView(urlString: postURLString ?? commentsURL)
+            })
     }
     
        
