@@ -22,14 +22,6 @@ struct WebContentView: UIViewRepresentable {
     func updateUIView(_ uiView: UIViewType, context: Context) {
     }
     
-    func canGoBack() -> Bool{
-        return webView.canGoBack
-    }
-    
-    func canGoForward() -> Bool{
-        return webView.canGoForward
-    }
-    
     func activateBackButton(){
         webView.goBack()
     }
