@@ -16,6 +16,7 @@
 		164AE07D269B26A900159CEF /* WebContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164AE07C269B26A900159CEF /* WebContentView.swift */; };
 		164AE07F269B27C600159CEF /* OpenedLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164AE07E269B27C600159CEF /* OpenedLinkView.swift */; };
 		164AE081269CA5C000159CEF /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164AE080269CA5C000159CEF /* CommentsView.swift */; };
+		168D066826B73B5B001A8BB5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168D066726B73B5B001A8BB5 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		164AE07C269B26A900159CEF /* WebContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebContentView.swift; sourceTree = "<group>"; };
 		164AE07E269B27C600159CEF /* OpenedLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedLinkView.swift; sourceTree = "<group>"; };
 		164AE080269CA5C000159CEF /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
+		168D066726B73B5B001A8BB5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 		16005A58256EBFD10071B89D /* Hacker News */ = {
 			isa = PBXGroup;
 			children = (
+				168D066626B73B44001A8BB5 /* Utilities */,
 				164AE079269B267800159CEF /* Views */,
 				16005A69256EC2720071B89D /* Models */,
 				16005A59256EBFD10071B89D /* Hacker_NewsApp.swift */,
@@ -98,6 +101,14 @@
 				164AE080269CA5C000159CEF /* CommentsView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		168D066626B73B44001A8BB5 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				168D066726B73B5B001A8BB5 /* Constants.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,6 +187,7 @@
 				164AE07F269B27C600159CEF /* OpenedLinkView.swift in Sources */,
 				16005A5A256EBFD10071B89D /* Hacker_NewsApp.swift in Sources */,
 				164AE081269CA5C000159CEF /* CommentsView.swift in Sources */,
+				168D066826B73B5B001A8BB5 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
