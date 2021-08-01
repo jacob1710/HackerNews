@@ -37,45 +37,56 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            List(networkManager.posts){ post in
-                HStack {
-                    Text(String(post.points))
-                    NavigationLink(
-                        destination: OpenedLinkView(
-                            postURLString: post.url,
-                            commentsURL: ContentView.getCommentsUrl(objectID: post.objectID),
-                            title: post.title
-                        ),
+            if networkManager.posts.count != 0{
+                List(networkManager.posts){ post in
+                    HStack {
+                        Text(String(post.points))
+                        NavigationLink(
+                            destination: OpenedLinkView(
+                                postURLString: post.url,
+                                commentsURL: ContentView.getCommentsUrl(objectID: post.objectID),
+                                title: post.title
+                            ),
+                            
+                            label: {
+                                Text(post.title)
+                                    .contextMenu {
+                                        Button {
+                                            openURL(URL(string: ContentView.getCommentsUrl(objectID: post.objectID))!)
+                                        } label: {
+                                            Label("View Comments", systemImage: "text.bubble")
+                                        }
+                                        Button {
+                                            openURL(URL(string: post.url!)!)
+                                        } label: {
+                                            Label("Open in Browser", systemImage: "globe")
+                                        }
+                                        
+                                    }
+                            })
                         
-                        label: {
-                            Text(post.title)
-                                .contextMenu {
-                                    Button {
-                                        openURL(URL(string: ContentView.getCommentsUrl(objectID: post.objectID))!)
-                                    } label: {
-                                        Label("View Comments", systemImage: "text.bubble")
-                                    }
-                                    Button {
-                                        openURL(URL(string: post.url!)!)
-                                    } label: {
-                                        Label("Open in Browser", systemImage: "globe")
-                                    }
-                                    
-                                }
-                        })
-                    
+                    }
+    //                if post.url == ContentView.getCommentsUrl(objectID: post.objectID){
+    //                    .foregroundColor(.orange)
+    //                }
                 }
-//                if post.url == ContentView.getCommentsUrl(objectID: post.objectID){
-//                    .foregroundColor(.orange)
-//                }
-            }
-            .navigationBarTitle("News")
+                .navigationBarTitle("News")
+               
+        }else{
+            ProgressView()
+                .onAppear(perform: {
+                    self.networkManager.fetchData()
+                })
+                .navigationBarTitle("News")
+        
+        }
+           
+           
         }
         .edgesIgnoringSafeArea(.all)
-        .onAppear(perform: {
-            self.networkManager.fetchData()
-        })
+        
     }
+    
     
     
     func actionSheet(theurl: String) {
