@@ -31,9 +31,3 @@ struct WebContentView: UIViewRepresentable {
     }
     
 }
-
-struct WebContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        WebContentView(urlString: "https://www.google.co.uk")
-    }
-}

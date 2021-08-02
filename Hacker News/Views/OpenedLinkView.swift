@@ -9,10 +9,10 @@ import SwiftUI
 
 struct OpenedLinkView: View {
     @Environment(\.openURL) var openURL
+    var post:Post?
     var postURLString: String?
     var commentsURL: String
     @State var title: String
-    @State var url: String?
     @State var webContentView: WebContentView?
     var body: some View {
             VStack{
@@ -35,7 +35,8 @@ struct OpenedLinkView: View {
                         .padding(EdgeInsets(top: 5, leading: 30, bottom: 0, trailing: 30))
                         
                         NavigationLink(
-                            destination: CommentsView(urlString: commentsURL),
+                            destination: CommentsView(post: post!)
+                                .navigationBarTitle("Comments"),
                             label: {
                                 Image(systemName: "text.bubble")
                                     .resizable()
@@ -78,8 +79,3 @@ struct OpenedLinkView: View {
        
 }
 
-struct OpenedLinkView_Previews: PreviewProvider {
-    static var previews: some View {
-        OpenedLinkView(postURLString: "https://www.google.co.uk", commentsURL: "https://www.google.co.uk", title: "Google")
-    }
-}
