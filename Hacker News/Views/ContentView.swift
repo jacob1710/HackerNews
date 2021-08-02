@@ -33,7 +33,7 @@ struct ContentView: View {
     
     @Environment(\.openURL) var openURL
     
-    @ObservedObject var networkManager = NetworkManager()
+    @EnvironmentObject var networkManager:NetworkManager
     
     var body: some View {
         NavigationView {
@@ -43,11 +43,12 @@ struct ContentView: View {
                         Text(String(post.points))
                         NavigationLink(
                             destination: OpenedLinkView(
+                                post: post,
                                 postURLString: post.url,
                                 commentsURL: ContentView.getCommentsUrl(objectID: post.objectID),
                                 title: post.title
+                                
                             ),
-                            
                             label: {
                                 Text(post.title)
                                     .contextMenu {

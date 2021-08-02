@@ -21,3 +21,14 @@ struct Post: Decodable, Identifiable {
     let url: String?
     
 }
+
+struct Comments: Decodable, Identifiable{
+    var id: Int?
+    var created_at: String?
+    var type: String?
+    var author: String?
+    var text: String?
+    var parent_id: Int?
+    var story_id: Int?
+    var children: [Comments]?
+}
