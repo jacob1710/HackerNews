@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import Pastel
 
 struct CommentsView: View {
     var post:Post
+    var postBackgroundColor: Color
     @EnvironmentObject var networkManager: NetworkManager
     var body: some View {
         if networkManager.comments.count != 0{
@@ -16,7 +18,15 @@ struct CommentsView: View {
                 List(networkManager.comments[0].children!,children: \.children){ comment in
     //                Text(comment.text?.utf8)
                     if let commentText = comment.text{
-                        Text(commentText.trimHTMLTags() ?? "")
+                        ZStack {
+                            Rectangle()
+                                .foregroundColor(postBackgroundColor)
+                                .cornerRadius(10)
+                            Text(commentText.trimHTMLTags() ?? "")
+                                .foregroundColor(getTextColor(postBackgroundColor))
+                                .padding()
+
+                        }
                     }
     //                Text(comment.text?.trimHTMLTags() ?? "")
     //                CommentTextView(htmlText: comment.text ?? "")
@@ -25,14 +35,9 @@ struct CommentsView: View {
 
                 }
                 .onAppear(perform: {
-                    if post.id == String(networkManager.comments[0].id ?? 0){
-                        //Same comment thread as last time
-                        print("Is Equal ID")
-                        print(networkManager.comments[0].children?[0])
-                    }else{
-                        //Different thread, need new comments
+                    if post.id != String(networkManager.comments[0].id ?? 0){
+                        //Different comment thread, need new comments
                         networkManager.fetchCommentsData(id: post.id)
-                        print(networkManager.comments[0].children?[0])
                     }
                 })
             }
@@ -69,7 +74,21 @@ struct CommentsView: View {
         
         
     }
+    func getTextColor(_ color: Color) -> Color{
+        if let red = color.cgColor?.components?[0], let green = color.cgColor?.components?[1], let blue = color.cgColor?.components?[2]{
+            if (red*0.299 + green*0.587 + blue*0.114) * 255 > 186{
+                return Color.black
+            }else{
+                return Color.white
+            }
+        }
+        
+        return Color.white
+//
+    }
 }
+
+
 
 
 extension String {
@@ -88,4 +107,12 @@ extension String {
         return attributedString?.string
     }
     
+}
+
+extension Color {
+    static var random: Color {
+        return Color(red: .random(in: 0...1),
+                     green: .random(in: 0...1),
+                     blue: .random(in: 0...1))
+    }
 }

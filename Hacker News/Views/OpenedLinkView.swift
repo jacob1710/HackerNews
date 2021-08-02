@@ -35,7 +35,7 @@ struct OpenedLinkView: View {
                         .padding(EdgeInsets(top: 5, leading: 30, bottom: 0, trailing: 30))
                         
                         NavigationLink(
-                            destination: CommentsView(post: post!)
+                            destination: CommentsView(post: post!, postBackgroundColor: Color.random)
                                 .navigationBarTitle("Comments"),
                             label: {
                                 Image(systemName: "text.bubble")
