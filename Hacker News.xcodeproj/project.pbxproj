@@ -13,6 +13,7 @@
 		16005A61256EBFD30071B89D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16005A60256EBFD30071B89D /* Preview Assets.xcassets */; };
 		16005A6B256EC2810071B89D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16005A6A256EC2810071B89D /* NetworkManager.swift */; };
 		16005A6E256EC3880071B89D /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16005A6D256EC3880071B89D /* PostData.swift */; };
+		16010DE126B9959A008988A0 /* ContentViewPostLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16010DE026B9959A008988A0 /* ContentViewPostLabel.swift */; };
 		164AE07D269B26A900159CEF /* WebContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164AE07C269B26A900159CEF /* WebContentView.swift */; };
 		164AE07F269B27C600159CEF /* OpenedLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164AE07E269B27C600159CEF /* OpenedLinkView.swift */; };
 		164AE081269CA5C000159CEF /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164AE080269CA5C000159CEF /* CommentsView.swift */; };
@@ -33,6 +34,7 @@
 		16005A62256EBFD30071B89D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16005A6A256EC2810071B89D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		16005A6D256EC3880071B89D /* PostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
+		16010DE026B9959A008988A0 /* ContentViewPostLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewPostLabel.swift; sourceTree = "<group>"; };
 		164AE07C269B26A900159CEF /* WebContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebContentView.swift; sourceTree = "<group>"; };
 		164AE07E269B27C600159CEF /* OpenedLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenedLinkView.swift; sourceTree = "<group>"; };
 		164AE080269CA5C000159CEF /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				164AE080269CA5C000159CEF /* CommentsView.swift */,
 				168D067026B745CC001A8BB5 /* CommentTextView.swift */,
 				168D067226B80142001A8BB5 /* SingleCommentView.swift */,
+				16010DE026B9959A008988A0 /* ContentViewPostLabel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				168D066D26B74467001A8BB5 /* PostManager.swift in Sources */,
 				16005A5A256EBFD10071B89D /* Hacker_NewsApp.swift in Sources */,
 				164AE081269CA5C000159CEF /* CommentsView.swift in Sources */,
+				16010DE126B9959A008988A0 /* ContentViewPostLabel.swift in Sources */,
 				168D066826B73B5B001A8BB5 /* Constants.swift in Sources */,
 				168D067126B745CC001A8BB5 /* CommentTextView.swift in Sources */,
 			);

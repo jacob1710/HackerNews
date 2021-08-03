@@ -14,55 +14,65 @@ struct CommentsView: View {
     @EnvironmentObject var networkManager: NetworkManager
     var body: some View {
         if networkManager.comments.count != 0{
-            if networkManager.comments[0].children?.count != 0{
-                List(networkManager.comments[0].children!,children: \.children){ comment in
-    //                Text(comment.text?.utf8)
-                    if let commentText = comment.text{
-                        ZStack {
-                            Rectangle()
-                                .foregroundColor(postBackgroundColor)
-                                .cornerRadius(10)
-                            Text(commentText.trimHTMLTags() ?? "")
-                                .foregroundColor(getTextColor(postBackgroundColor))
-                                .padding()
+            if networkManager.comments[0].text == nil{
+                if networkManager.comments[0].children?.count != 0{
+                    List(networkManager.comments[0].children!,children: \.children){ comment in
+    //                    Text(comment.text ?? "")
+                        if let commentText = comment.text{
+                            if let unwrappedText = commentText.trimHTMLTags(){
+                                ZStack {
+                                    Rectangle()
+                                        .foregroundColor(postBackgroundColor)
+                                        .cornerRadius(10)
+                                    Text(unwrappedText.trimHTMLTags()!)
+                                        .foregroundColor(getTextColor(postBackgroundColor))
+                                        .padding()
+
+                                }
+                            }
 
                         }
+
                     }
-    //                Text(comment.text?.trimHTMLTags() ?? "")
-    //                CommentTextView(htmlText: comment.text ?? "")
-    //                    .environmentObject(PostManager())
-
-
+                    .onAppear(perform: {
+                        if post.id != String(networkManager.comments[0].id ?? 0){
+                            //Different comment thread, need new comments
+                            networkManager.fetchCommentsData(id: post.id)
+                        }
+                    })
+                    
                 }
-                .onAppear(perform: {
-                    if post.id != String(networkManager.comments[0].id ?? 0){
-                        //Different comment thread, need new comments
-                        networkManager.fetchCommentsData(id: post.id)
-                    }
-                })
+            }else{
+                if networkManager.comments[0].children?.count != 0{
+                    List(networkManager.comments,children: \.children){ comment in
+
+        //                    Text(comment.text ?? "")
+                            if let commentText = comment.text{
+                                if let unwrappedText = commentText.trimHTMLTags(){
+                                    ZStack {
+                                        Rectangle()
+                                            .foregroundColor(comment.parent_id == nil ? .blue:postBackgroundColor)
+                                            .cornerRadius(10)
+                                        Text(unwrappedText.trimHTMLTags()!)
+                                            .foregroundColor(comment.parent_id == nil ? .white:getTextColor(postBackgroundColor))
+                                            .padding()
+
+                                    }
+                                }
+
+                            }
+
+                        }
+                        .onAppear(perform: {
+                            if post.id != String(networkManager.comments[0].id ?? 0){
+                                //Different comment thread, need new comments
+                                networkManager.fetchCommentsData(id: post.id)
+                            }
+                    })
+                    
+                }
             }
             
-//                ScrollView {
-//                    ForEach(networkManager.comments){ comment in
-//                        Section(
-//                            header:  CommentTextView(htmlText: comment.text ?? "")
-//                                .environmentObject(PostManager())
-//                                .padding()
-//                        ) {
-//                            OutlineGroup(comment.children ?? [],
-//                                         id: \.id,
-//                                         children: \.children
-//                            ) { tree in
-//                                CommentTextView(htmlText: tree.text ?? "")
-//                                                    .environmentObject(PostManager())
-//                                    .padding()
-//
-//                            }
-//                        }
-//                    }
-//                }
-//
-//
         }else{
             ProgressView()
                 .onAppear(perform: {
@@ -70,8 +80,6 @@ struct CommentsView: View {
                 })
             
         }
-//        WebContentView(urlString:urlString)
-        
         
     }
     func getTextColor(_ color: Color) -> Color{

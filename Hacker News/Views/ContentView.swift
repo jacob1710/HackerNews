@@ -41,35 +41,28 @@ struct ContentView: View {
                 List(networkManager.posts){ post in
                     HStack {
                         Text(String(post.points))
-                        NavigationLink(
-                            destination: OpenedLinkView(
-                                post: post,
-                                postURLString: post.url,
-                                commentsURL: ContentView.getCommentsUrl(objectID: post.objectID),
-                                title: post.title
-                                
-                            ),
-                            label: {
-                                Text(post.title)
-                                    .contextMenu {
-                                        Button {
-                                            openURL(URL(string: ContentView.getCommentsUrl(objectID: post.objectID))!)
-                                        } label: {
-                                            Label("View Comments", systemImage: "text.bubble")
-                                        }
-                                        Button {
-                                            openURL(URL(string: post.url!)!)
-                                        } label: {
-                                            Label("Open in Browser", systemImage: "globe")
-                                        }
-                                        
-                                    }
-                            })
+                        if post.url != nil{
+                            NavigationLink(
+                                destination: OpenedLinkView(
+                                    post: post,
+                                    postURLString: post.url,
+                                    commentsURL: ContentView.getCommentsUrl(objectID: post.objectID),
+                                    title: post.title
+                                    
+                                ),
+                                label: {
+                                    ContentViewPostLabel(post:post)
+                                })
+                        }else{
+                            NavigationLink(
+                                destination:  CommentsView(post: post, postBackgroundColor: Color.random),
+                                label: {
+                                    ContentViewPostLabel(post:post)
+                                })
+                        }
+                        
                         
                     }
-    //                if post.url == ContentView.getCommentsUrl(objectID: post.objectID){
-    //                    .foregroundColor(.orange)
-    //                }
                 }
                 .navigationBarTitle("News")
                
