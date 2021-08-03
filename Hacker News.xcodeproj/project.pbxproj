@@ -111,17 +111,33 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		164AE079269B267800159CEF /* Views */ = {
+		16010DE426B9ACEE008988A0 /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				164AE080269CA5C000159CEF /* CommentsView.swift */,
+				16010DE226B9A178008988A0 /* CommentJustTextView.swift */,
+				168D067026B745CC001A8BB5 /* CommentTextView.swift */,
+				168D067226B80142001A8BB5 /* SingleCommentView.swift */,
+			);
+			path = Comments;
+			sourceTree = "<group>";
+		};
+		16010DE526B9ACFC008988A0 /* Content */ = {
 			isa = PBXGroup;
 			children = (
 				16005A5B256EBFD10071B89D /* ContentView.swift */,
 				164AE07C269B26A900159CEF /* WebContentView.swift */,
 				164AE07E269B27C600159CEF /* OpenedLinkView.swift */,
-				164AE080269CA5C000159CEF /* CommentsView.swift */,
-				168D067026B745CC001A8BB5 /* CommentTextView.swift */,
-				168D067226B80142001A8BB5 /* SingleCommentView.swift */,
 				16010DE026B9959A008988A0 /* ContentViewPostLabel.swift */,
-				16010DE226B9A178008988A0 /* CommentJustTextView.swift */,
+			);
+			path = Content;
+			sourceTree = "<group>";
+		};
+		164AE079269B267800159CEF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				16010DE526B9ACFC008988A0 /* Content */,
+				16010DE426B9ACEE008988A0 /* Comments */,
 			);
 			path = Views;
 			sourceTree = "<group>";

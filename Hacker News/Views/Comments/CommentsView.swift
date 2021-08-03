@@ -19,7 +19,7 @@ struct CommentsView: View {
                     List(networkManager.comments[0].children!,children: \.children){ comment in
                         if let commentText = comment.text{
                             if let unwrappedText = commentText.trimHTMLTags(){
-                                CommentJustTextView(unwrappedText: unwrappedText, postBackgroundColor: postBackgroundColor, commentParentID: comment.parent_id)
+                                CommentJustTextView(unwrappedText: unwrappedText, postBackgroundColor: postBackgroundColor, commentParentID: comment.parent_id, hasChildren: comment.children!.count != 0)
                             }
 
                         }
@@ -43,7 +43,7 @@ struct CommentsView: View {
                             if let commentText = comment.text{
                                 if let unwrappedText = commentText.trimHTMLTags(){
                                     ZStack {
-                                        CommentJustTextView(unwrappedText: unwrappedText, postBackgroundColor: postBackgroundColor, commentParentID: comment.parent_id)
+                                        CommentJustTextView(unwrappedText: unwrappedText, postBackgroundColor: postBackgroundColor, commentParentID: comment.parent_id,  hasChildren: comment.children!.count != 0)
 
                                     }
                                 }

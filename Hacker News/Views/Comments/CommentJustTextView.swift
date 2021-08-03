@@ -11,11 +11,20 @@ struct CommentJustTextView: View {
     var unwrappedText: String
     var postBackgroundColor: Color
     var commentParentID:Int?
+    var hasChildren:Bool
     var body: some View {
         ZStack {
-            Rectangle()
-                .foregroundColor(commentParentID == nil ? .blue:postBackgroundColor)
-                .cornerRadius(10)
+            if hasChildren{
+                Rectangle()
+                    .foregroundColor(commentParentID == nil ? .blue:postBackgroundColor)
+                    .cornerRadius(10)
+                    
+            }else{
+                Rectangle()
+                    .foregroundColor(commentParentID == nil ? .blue:postBackgroundColor)
+                    .cornerRadius(10)
+            }
+           
             Text(unwrappedText)
                 .foregroundColor(commentParentID == nil ? .white: CommentsView.getTextColor(postBackgroundColor))
                 .padding()
