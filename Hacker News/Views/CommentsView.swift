@@ -17,21 +17,13 @@ struct CommentsView: View {
             if networkManager.comments[0].text == nil{
                 if networkManager.comments[0].children?.count != 0{
                     List(networkManager.comments[0].children!,children: \.children){ comment in
-    //                    Text(comment.text ?? "")
                         if let commentText = comment.text{
                             if let unwrappedText = commentText.trimHTMLTags(){
-                                ZStack {
-                                    Rectangle()
-                                        .foregroundColor(postBackgroundColor)
-                                        .cornerRadius(10)
-                                    Text(unwrappedText.trimHTMLTags()!)
-                                        .foregroundColor(getTextColor(postBackgroundColor))
-                                        .padding()
-
-                                }
+                                CommentJustTextView(unwrappedText: unwrappedText, postBackgroundColor: postBackgroundColor, commentParentID: comment.parent_id)
                             }
 
                         }
+
 
                     }
                     .onAppear(perform: {
@@ -40,22 +32,18 @@ struct CommentsView: View {
                             networkManager.fetchCommentsData(id: post.id)
                         }
                     })
+                    .onDisappear {
+                        networkManager.removeCommentsData()
+                    }
                     
                 }
             }else{
                 if networkManager.comments[0].children?.count != 0{
                     List(networkManager.comments,children: \.children){ comment in
-
-        //                    Text(comment.text ?? "")
                             if let commentText = comment.text{
                                 if let unwrappedText = commentText.trimHTMLTags(){
                                     ZStack {
-                                        Rectangle()
-                                            .foregroundColor(comment.parent_id == nil ? .blue:postBackgroundColor)
-                                            .cornerRadius(10)
-                                        Text(unwrappedText.trimHTMLTags()!)
-                                            .foregroundColor(comment.parent_id == nil ? .white:getTextColor(postBackgroundColor))
-                                            .padding()
+                                        CommentJustTextView(unwrappedText: unwrappedText, postBackgroundColor: postBackgroundColor, commentParentID: comment.parent_id)
 
                                     }
                                 }
@@ -69,6 +57,9 @@ struct CommentsView: View {
                                 networkManager.fetchCommentsData(id: post.id)
                             }
                     })
+                    .onDisappear {
+                        networkManager.removeCommentsData()
+                    }
                     
                 }
             }
@@ -82,7 +73,7 @@ struct CommentsView: View {
         }
         
     }
-    func getTextColor(_ color: Color) -> Color{
+    static func getTextColor(_ color: Color) -> Color{
         if let red = color.cgColor?.components?[0], let green = color.cgColor?.components?[1], let blue = color.cgColor?.components?[2]{
             if (red*0.299 + green*0.587 + blue*0.114) * 255 > 186{
                 return Color.black

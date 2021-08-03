@@ -65,4 +65,8 @@ class NetworkManager: ObservableObject {
             dataTask.resume()
         }
     }
+    
+    func removeCommentsData(){
+        self.comments.removeAll()
+    }
 }

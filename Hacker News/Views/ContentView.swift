@@ -55,7 +55,14 @@ struct ContentView: View {
                                 })
                         }else{
                             NavigationLink(
-                                destination:  CommentsView(post: post, postBackgroundColor: Color.random),
+//                                destination:  CommentsView(post: post, postBackgroundColor: Color.random),
+                                destination:OpenedLinkView(
+                                    post: post,
+                                    postURLString: post.url,
+                                    commentsURL: ContentView.getCommentsUrl(objectID: post.objectID),
+                                    title: post.title
+                                    
+                                ),
                                 label: {
                                     ContentViewPostLabel(post:post)
                                 })

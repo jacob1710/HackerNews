@@ -16,7 +16,7 @@ struct OpenedLinkView: View {
     @State var webContentView: WebContentView?
     var body: some View {
             VStack{
-                webContentView                
+                webContentView
                 ZStack{
                     Rectangle()
                         .frame(height: 30, alignment: .center)
